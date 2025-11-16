@@ -3,825 +3,953 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>933PROXIES | Premium Residential Proxies Worldwide</title>
-    <meta name="description" content="933PROXIES offers high-quality residential proxies from 195+ countries. Annual subscription only $330 USD via Bitcoin. Secure, fast, and anonymous.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="933 Proxie — Premium rotating and dedicated proxies in 150+ countries. Residential, Datacenter, Mobile. Secure BTC payments.">
+    <title>933 Proxie | Premium Proxies Worldwide</title>
     <style>
+        /* ==== RESET & BASE ==== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :focus-visible { outline: 2px solid #6e4bff; outline-offset: 2px; }
+        body { 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif; 
+            line-height: 1.6; 
+            color: #f0f0ff; 
+            background: #0a0a1f;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(110, 75, 255, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 90% 80%, rgba(110, 75, 255, 0.15) 0%, transparent 30%),
+                radial-gradient(circle at 50% 50%, rgba(110, 75, 255, 0.08) 0%, transparent 50%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        img { max-width: 100%; display: block; }
+        a { color: inherit; text-decoration: none; }
+        button { font: inherit; cursor: pointer; }
+        input, select, textarea { font: inherit; }
+
+        /* ==== TYPOGRAPHY & COLORS ==== */
         :root {
-            --primary: #0a0a0a;
-            --secondary: #1a1a1a;
-            --accent: #00d4ff;
-            --text: #e0e0e0;
-            --text-light: #a0a0a0;
-            --border: #333;
+            --accent: #6e4bff;
+            --accent-hover: #8c6aff;
+            --bg-primary: #0a0a1f;
+            --bg-secondary: #14142e;
+            --bg-card: #1c1c38;
+            --text-primary: #f0f0ff;
+            --text-secondary: #b8b8e0;
+            --border: #2e2e55;
+            --success: #4ade80;
+            --warning: #fbbf24;
+            --error: #ff6b6b;
         }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+        h1, h2, h3 { font-weight: 700; line-height: 1.2; }
+        h1 { font-size: clamp(2.8rem, 7vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 5vw, 3rem); }
+        p { font-size: 1rem; margin-bottom: 1rem; }
+        small { font-size: 0.875rem; color: var(--text-secondary); }
+
+        /* ==== LAYOUT ==== */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+        .skip-link { position: absolute; top: 1rem; left: 1rem; background: var(--accent); color: #fff; padding: 0.6rem 1.2rem; border-radius: 0.5rem; z-index: 1000; transform: translateY(-150%); transition: transform 0.3s; }
+        .skip-link:focus { transform: translateY(0); }
+
+        /* ==== COMPONENTS ==== */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+            padding: 0.9rem 1.8rem; border: none; border-radius: 0.6rem; font-weight: 600; font-size: 1rem;
+            background: var(--accent); color: #fff; transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(110, 75, 255, 0.3);
         }
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--primary);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
+        .btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(110, 75, 255, 0.4); }
+        .btn:active { transform: translateY(0); }
+
+        .card {
+            background: var(--bg-card); border-radius: 1.2rem; padding: 1.8rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25); transition: all 0.3s ease;
+            border: 1px solid var(--border);
         }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
+        .card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.35); }
+
+        .badge {
+            display: inline-flex; padding: 0.4rem 1rem; border-radius: 2rem;
+            background: rgba(110, 75, 255, 0.2); color: var(--accent-hover); font-size: 0.9rem; font-weight: 600;
+            border: 1px solid rgba(110, 75, 255, 0.3);
         }
-        /* Header */
+
+        /* ==== HEADER ==== */
         header {
-            background: rgba(10,10,10,0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000; background: rgba(10,10,31,0.92); backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
         }
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent);
-            text-decoration: none;
-        }
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-        /* Hero */
+        nav { display: flex; align-items: center; justify-content: space-between; padding: 1.3rem 0; }
+        .logo { font-size: 1.9rem; font-weight: 800; color: #fff; }
+        .logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a { font-weight: 500; color: var(--text-secondary); transition: color 0.2s; font-size: 1rem; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; }
+
+        /* ==== HERO ==== */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-            background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, rgba(10,10,10,1) 100%);
-        }
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        .hero-text h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(90deg, var(--accent), #00b8d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero-text p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            max-width: 500px;
-        }
-        .price-tag {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin: 1.5rem 0;
-        }
-        .btn {
-            display: inline-block;
-            padding: 0.9rem 2rem;
-            background: var(--accent);
-            color: #000;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,212,255,0.2);
-        }
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            margin-left: 1rem;
-        }
-        .btn-secondary:hover {
-            background: var(--accent);
-            color: #000;
-        }
-        .features {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-        .feature {
-            background: var(--secondary);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-        }
-        .feature h3 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-        /* Products */
-        section {
-            padding: 5rem 0;
-        }
-        h2 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(90deg, var(--accent), #00b8d4);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        .tab-btn {
-            padding: 0.8rem 1.5rem;
-            background: var(--secondary);
-            border: 1px solid var(--border);
-            color: var(--text-light);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .tab-btn.active {
-            background: var(--accent);
-            color: #000;
-            border-color: var(--accent);
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .countries-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .location-card {
-            background: var(--secondary);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: transform 0.3s;
-        }
-        .location-card:hover {
-            transform: translateY(-8px);
-        }
-        .location-header {
-            background: linear-gradient(135deg, var(--accent), #00b8d4);
-            color: #000;
-            padding: 1rem;
-            font-weight: 600;
-            text-align: center;
-        }
-        .location-body {
-            padding: 1.5rem;
-            font-size: 0.95rem;
-        }
-        .blur {
-            filter: blur(5px);
-            user-select: none;
-            pointer-events: none;
-            color: var(--text-light);
-        }
-        .order-btn {
-            width: 100%;
-            margin-top: 1rem;
-            background: var(--accent);
-            color: #000;
-            border: none;
-            padding: 0.8rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-        .modal-content {
-            background: var(--secondary);
-            padding: 2rem;
-            border-radius: 16px;
-            width: 90%;
-            max-width: 500px;
-            border: 1px solid var(--border);
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        .close {
-            float: right;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-light);
-        }
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-        }
-        input, select {
-            width: 100%;
-            padding: 0.8rem;
-            background: var(--primary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text);
-            font-size: 1rem;
-        }
-        .wallet-display {
-            background: var(--primary);
-            padding: 1rem;
-            border-radius: 8px;
-            word-break: break-all;
-            margin-top: 0.5rem;
-            font-family: monospace;
-            font-size: 0.9rem;
-        }
-        .error {
-            color: #ff6b6b;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            display: none;
-        }
-        /* About */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        .about-text {
-            font-size: 1.1rem;
-            color: var(--text-light);
-        }
-        .about-text h3 {
-            color: var(--accent);
-            margin: 1.5rem 0 1rem;
-        }
-        .about-image {
-            background: linear-gradient(135deg, #00d4ff, #0099cc);
-            height: 400px;
-            border-radius: 16px;
-            position: relative;
+            position: relative; padding: 9rem 0 6rem; text-align: center;
             overflow: hidden;
         }
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><path fill="%23000" d="M100 15c-47 0-85 38-85 85s38 85 85 85 85-38 85-85-38-85-85-85zm0 160c-41.4 0-75-33.6-75-75s33.6-75 75-75 75 33.6 75 75-33.6 75-75 75z"/><path fill="%23fff" d="M100 30c-38.7 0-70 31.3-70 70s31.3 70 70 70 70-31.3 70-70-31.3-70-70-70zm0 130c-33.1 0-60-26.9-60-60s26.9-60 60-60 60 26.9 60 60-26.9 60-60 60z"/><circle fill="%2300d4ff" cx="100" cy="100" r="40"/></svg>') center/contain no-repeat;
-            opacity: 0.15;
+        .hero::before {
+            content: '933'; position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+            font-size: 30rem; font-weight: 900; color: rgba(110, 75, 255, 0.03); letter-spacing: -2rem;
+            pointer-events: none; z-index: 0; opacity: 0.8;
+            animation: float 15s infinite ease-in-out;
         }
-        /* Contact */
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-30px); }
         }
-        .contact-card {
-            background: var(--secondary);
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            border: 1px solid var(--border);
+        .hero-content { position: relative; z-index: 1; }
+        .hero h1 { margin-bottom: 0.6rem; background: linear-gradient(90deg, #fff, var(--accent-hover)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 800px; margin: 0 auto 2.5rem; }
+
+        /* ==== SECTIONS ==== */
+        section { padding: 6rem 0; }
+        .section-title { text-align: center; margin-bottom: 3.5rem; position: relative; color: #fff; font-size: 2.2rem; }
+        .section-title::after { content: ''; width: 80px; height: 4px; background: var(--accent); position: absolute; bottom: -1.2rem; left: 50%; transform: translateX(-50%); border-radius: 2px; }
+
+        /* ==== PRODUCTS ==== */
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+
+        /* ==== COUNTRIES ==== */
+        .countries-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+        .country-item { background: var(--bg-secondary); padding: 0.8rem; border-radius: 0.8rem; text-align: center; font-size: 0.95rem; transition: all 0.2s; border: 1px solid var(--border); }
+        .country-item:hover { background: rgba(110, 75, 255, 0.15); border-color: var(--accent); }
+
+        /* ==== ORDER FORM — TWO COLUMN LAYOUT ==== */
+        .order-form-container { max-width: 1000px; margin: 0 auto; }
+        .form-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+        @media (max-width: 900px) { .form-columns { grid-template-columns: 1fr; } }
+        .form-left, .form-right { display: flex; flex-direction: column; gap: 1.5rem; }
+        .form-group { display: flex; flex-direction: column; }
+        label { margin-bottom: 0.6rem; font-weight: 600; color: var(--text-primary); font-size: 0.95rem; }
+        input, select, textarea {
+            padding: 0.9rem; background: var(--bg-secondary); border: 1px solid var(--border);
+            border-radius: 0.6rem; color: #fff; transition: all 0.2s; font-size: 1rem;
         }
-        .contact-card h3 {
-            color: var(--accent);
-            margin-bottom: 1rem;
+        input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(110, 75, 255, 0.2); }
+
+        .country-selector {
+            max-height: 280px; overflow-y: auto; background: var(--bg-secondary);
+            border: 1px solid var(--border); border-radius: 0.6rem; padding: 0.6rem;
         }
-        .response-time {
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-top: 0.5rem;
+        .country-search { padding: 0.8rem; background: var(--bg-primary); border: 1px solid var(--border); border-radius: 0.5rem; margin-bottom: 0.6rem; }
+        .country-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .country-chip {
+            padding: 0.4rem 0.8rem; background: rgba(110, 75, 255, 0.2); border: 1px solid var(--accent);
+            border-radius: 2rem; font-size: 0.85rem; display: inline-flex; align-items: center; gap: 0.5rem;
         }
-        /* Footer */
-        footer {
-            background: var(--secondary);
-            padding: 3rem 0 1.5rem;
-            border-top: 1px solid var(--border);
-            margin-top: 5rem;
+        .country-chip button { background: none; border: none; color: #ff6b6b; font-weight: bold; cursor: pointer; }
+
+        /* ==== SPECIAL REQUEST BOX ==== */
+        .special-request {
+            grid-column: span 2;
+            background: rgba(110, 75, 255, 0.05); border: 1px dashed var(--accent); padding: 1.2rem; border-radius: 0.8rem;
         }
-        .footer-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-        .footer-col h3 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-        .footer-col a {
-            color: var(--text-light);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .footer-col a:hover {
-            color: var(--accent);
-        }
-        .copyright {
-            text-align: center;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
-        }
-        /* Legal Pages */
-        .legal-page {
-            display: none;
-            padding: 6rem 0;
-        }
-        .legal-page.active {
-            display: block;
-        }
-        .legal-content {
-            max-width: 900px;
-            margin: 0 auto;
-            background: var(--secondary);
-            padding: 3rem;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-        .legal-content h1 {
-            color: var(--accent);
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-        }
-        .legal-content h2 {
-            color: var(--accent);
-            margin: 2rem 0 1rem;
-            font-size: 1.6rem;
-            text-align: left;
-        }
-        .legal-content p, .legal-content li {
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
-        .legal-content ul {
-            margin-left: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        .back-btn {
-            display: inline-block;
-            margin-top: 2rem;
-            color: var(--accent);
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        @media (max-width: 768px) {
-            .hero-content, .about-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-            .nav-links {
-                display: none;
-            }
-            .features {
-                grid-template-columns: 1fr;
-            }
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            .tabs {
-                gap: 0.5rem;
-            }
-            .tab-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-            }
+        .special-request textarea { min-height: 100px; resize: vertical; }
+
+        /* ==== PRICING & PAYMENT ==== */
+        .pricing-breakdown { background: var(--bg-secondary); padding: 1.6rem; border-radius: 0.8rem; margin: 2rem 0; border: 1px solid var(--border); }
+        .pricing-row { display: flex; justify-content: space-between; padding: 0.6rem 0; font-size: 1rem; }
+        .pricing-row.total { font-weight: 700; font-size: 1.2rem; color: var(--accent-hover); padding-top: 1rem; border-top: 1px dashed var(--border); }
+
+        .payment-info { margin-top: 2rem; padding: 1.8rem; background: var(--bg-secondary); border-radius: 1rem; border: 1px solid var(--border); }
+
+        /* ==== ABOUT & REVIEWS ==== */
+        .about-grid { display: grid; gap: 2rem; }
+        @media (min-width: 768px) { .about-grid { grid-template-columns: repeat(2, 1fr); } }
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .review-card .stars { color: #ffd700; font-size: 1.3rem; margin-bottom: 0.6rem; }
+        .review-card .username { color: var(--accent-hover); font-weight: 600; margin-top: 0.8rem; }
+
+        /* ==== FOOTER ==== */
+        footer { background: var(--bg-secondary); padding: 4rem 0 2rem; text-align: center; border-top: 1px solid var(--border); }
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* ==== MOBILE NAV ==== */
+        .mobile-menu-btn { display: none; background: none; border: none; color: #fff; font-size: 1.8rem; }
+        @media (max-width: 900px) {
+            .nav-links { position: fixed; top: 100%; left: 0; width: 100%; background: var(--bg-primary); flex-direction: column; padding: 2rem; transform: translateY(-100%); transition: transform 0.3s; backdrop-filter: blur(12px); }
+            .nav-links.open { transform: translateY(0); }
+            .mobile-menu-btn { display: block; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">933PROXIES</a>
-                <ul class="nav-links">
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+                <div class="logo">933 <span>Proxie</span></div>
+                <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false">Menu</button>
+                <div class="nav-links">
+                    <a href="#products">Products</a>
+                    <a href="#countries">Coverage</a>
+                    <a href="#order">Order</a>
+                    <a href="#about">About</a>
+                    <a href="#reviews">Reviews</a>
+                    <a href="#contact">Contact</a>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <div id="main-content">
-        <!-- Hero -->
+    <main id="main">
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-text">
-                        <h1>Premium Residential Proxies</h1>
-                        <p>Access genuine residential IPs from 195+ countries with city-level targeting. Undetectable, high-speed, and ethically sourced.</p>
-                        <div class="price-tag">$330 <span style="font-size:1rem; color:var(--text-light);">USD / Year</span></div>
-                        <div>
-                            <a href="#" class="btn" onclick="openOrderModal('Annual Plan')">Order Now</a>
-                            <a href="#contact" class="btn btn-secondary">Contact Sales</a>
-                        </div>
-                        <div class="features">
-                            <div class="feature">
-                                <h3>195+ Countries</h3>
-                                <p>With states & cities</p>
-                            </div>
-                            <div class="feature">
-                                <h3>Residential Only</h3>
-                                <p>Real user IPs</p>
-                            </div>
-                            <div class="feature">
-                                <h3>99.9% Uptime</h3>
-                                <p>Enterprise-grade</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero-visual">
-                        <div class="about-image"></div>
-                    </div>
+                    <h1>933 Proxie</h1>
+                    <p>Global proxy infrastructure with precision targeting — city, state, ISP.</p>
+                    <div class="badge">150+ Countries • City & State Targeting</div>
+                    <a href="#order" class="btn" style="margin-top: 2.5rem; font-size: 1.1rem;">Start Now</a>
                 </div>
             </div>
         </section>
 
-        <!-- Products -->
         <section id="products">
             <div class="container">
-                <h2>Residential Proxies by Location</h2>
-                <div class="tabs">
-                    <button class="tab-btn active" onclick="openTab('countries')">Countries</button>
-                    <button class="tab-btn" onclick="openTab('states')">States / Regions</button>
-                    <button class="tab-btn" onclick="openTab('cities')">Cities</button>
-                </div>
-
-                <!-- Countries Tab -->
-                <div id="countries" class="tab-content active">
-                    <div class="countries-grid" id="countries-container"></div>
-                </div>
-
-                <!-- States Tab -->
-                <div id="states" class="tab-content">
-                    <div class="countries-grid" id="states-container"></div>
-                </div>
-
-                <!-- Cities Tab -->
-                <div id="cities" class="tab-content">
-                    <div class="countries-grid" id="cities-container"></div>
+                <h2 class="section-title">Proxy Solutions</h2>
+                <div class="products-grid">
+                    <div class="card">
+                        <h3>Residential — Rotating</h3>
+                        <p>Authentic user IPs. Auto-rotate per request or sticky sessions.</p>
+                        <ul style="list-style: none; margin-top: 1rem; font-size: 0.95rem;">
+                            <li>300–700 threads</li>
+                            <li>25–75 Mbps</li>
+                            <li>Scraping, ads, sneaker bots</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Residential — Dedicated</h3>
+                        <p>Exclusive static IPs. Full control and stability.</p>
+                        <ul style="list-style: none; margin-top: 1rem; font-size: 0.95rem;">
+                            <li>150–400 threads</li>
+                            <li>30–80 Mbps</li>
+                            <li>Social media, accounts</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Datacenter</h3>
+                        <p>High-speed server IPs. Maximum performance.</p>
+                        <ul style="list-style: none; margin-top: 1rem; font-size: 0.95rem;">
+                            <li>1500+ threads</li>
+                            <li>300+ Mbps</Tl>
+                            <li>SEO, bulk data</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Mobile</h3>
+                        <p>4G/5G carrier IPs. Ultimate bypass.</p>
+                        <ul style="list-style: none; margin-top: 1rem; font-size: 0.95rem;">
+                            <li>120–500 threads</li>
+                            <li>15–50 Mbps</li>
+                            <li>Mobile emulation, geo-tests</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- About -->
-        <section id="about" style="background:var(--secondary);">
+        <section id="countries" style="background: var(--bg-secondary);">
             <div class="container">
-                <h2>About Our Residential Proxies</h2>
-                <div class="about-grid">
-                    <div class="about-text">
-                        <h3>100% Residential IPs</h3>
-                        <p>All proxies are sourced from real residential devices with user consent. No datacenter IPs.</p>
-                        
-                        <h3>City-Level Targeting</h3>
-                        <p>Target specific countries, states, and cities for precision scraping and automation.</p>
-                        
-                        <h3>Rotating & Sticky</h3>
-                        <p>Auto-rotate per request or keep sticky sessions up to 30 minutes.</p>
-                        
-                        <h3>HTTP/S & SOCKS5</h3>
-                        <p>Full protocol support with auth via username:password or IP whitelist.</p>
-                    </div>
-                    <div>
-                        <div class="about-image"></div>
+                <h2 class="section-title">Global Coverage</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: var(--text-secondary);">City & state-level targeting available in 80+ countries. Contact support for specific locations.</p>
+                <div class="countries-grid" id="countriesGrid"></div>
+            </div>
+        </section>
+
+        <section id="order">
+            <div class="container">
+                <h2 class="section-title">Secure Your Proxies</h2>
+                <div class="order-form-container">
+                    <form id="orderForm" class="card">
+                        <div class="form-columns">
+                            <div class="form-left">
+                                <div class="form-group">
+                                    <label for="product">Product</label>
+                                    <select id="product" required>
+                                        <option value="">Choose Product</option>
+                                        <option value="res-rot">Residential — Rotating</option>
+                                        <option value="res-ded">Residential — Dedicated</option>
+                                        <option value="dc">Datacenter</option>
+                                        <option value="mobile">Mobile</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="country">Country</label>
+                                    <div class="country-selector">
+                                        <input type="text" class="country-search" placeholder="Search & select countries...">
+                                        <div class="country-list" id="countryList"></div>
+                                    </div>
+                                    <div id="selectedCountries" style="margin-top: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.5rem;"></div>
+                                    <input type="hidden" id="country" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity">Slots</label>
+                                    <input type="number" id="quantity" min="1" value="1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Full Name</label>
+                                    <input type="text" id="name" required>
+                                </div>
+                            </div>
+                            <div class="form-right">
+                                <div class="form-group">
+                                    <label for="duration">Duration</label>
+                                    <select id="duration" required>
+                                        <option value="365">365 days (Annual — 15% off)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="promo">Promo Code</label>
+                                    <input type="text" id="promo" placeholder="Optional">
+                                </div>
+                                <div class="form-group">
+                                    <label for="special">Special Request (City, State, ISP)</label>
+                                    <textarea id="special" placeholder="e.g., New York, California, Verizon, etc. We support city/state targeting in 80+ countries." rows="3"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="special-request">
+                            <p><strong>Need specific targeting?</strong> Enter cities, states, or ISPs above. Our team will confirm availability within 4 hours.</p>
+                        </div>
+                        <div class="pricing-breakdown">
+                            <div class="pricing-row"><span>Base (per slot/month)</span><span id="basePrice">$0.00</span></div>
+                            <div class="pricing-row"><span>Slots × 12 months</span><span id="slotsTotal">$0.00</span></div>
+                            <div class="pricing-row"><span>Annual Discount (15%)</span><span id="discountAmount">-$0.00</span></div>
+                            <div class="pricing-row"><span>Tax</span><span id="taxAmount">$0.00</span></div>
+                            <div class="pricing-row total"><span>Total USD</span><span id="totalUSD">$0.00</span></div>
+                            <div class="pricing-row total"><span>Total BTC</span><span id="totalBTC">0.000000</span></div>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%; font-size: 1.1rem; padding: 1rem;">Generate Invoice</button>
+                    </form>
+
+                    <div id="paymentSection" style="display: none; margin-top: 2.5rem;">
+                        <div class="card payment-info">
+                            <h3 style="margin-bottom: 1rem; color: var(--accent-hover);">Complete Payment</h3>
+                            <p><strong>Send to:</strong> <span id="btcAddress" style="font-family: monospace; background: var(--bg-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; display: inline-block; margin: 0.5rem 0;">bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh</span></p>
+                            <button class="btn" style="width: 100%; margin: 1rem 0;" data-copy="btcAddress">Copy Address</button>
+                            <div class="form-group" style="margin-top: 1.5rem;">
+                                <label for="txid">Bitcoin TXID (64 hex chars)</label>
+                                <input type="text" id="txid" class="txid-input" maxlength="64" placeholder="e.g. a1b2c3... (64 characters)" required>
+                            </div>
+                            <button id="submitTxid" class="btn" style="width: 100%; background: var(--success); margin-top: 1rem;">Submit TXID & Activate</button>
+                        </div>
+                        <div style="margin-top: 1.5rem; padding: 1.2rem; background: rgba(251,191,36,0.1); border: 1px solid var(--warning); border-radius: 0.8rem; font-size: 0.95rem;">
+                            <p><strong>Verification:</strong> Manual check after 3 confirmations. Typical delivery: <strong>within 4 business hours</strong>.</p>
+                            <p><strong>Security:</strong> Verify address. TXID required for tracking. Never share private keys.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact -->
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About 933 Proxie</h2>
+                <div class="about-grid">
+                    <div class="card">
+                        <h3>Network Architecture</h3>
+                        <p>Residential proxies utilize IP addresses assigned by ISPs to real residential devices, routing traffic through legitimate user connections for high authenticity and low detection rates.</p>
+                        <p>Datacenter proxies are hosted in high-performance server facilities, offering superior speed and stability but potentially easier to identify by advanced systems.</p>
+                        <p>Mobile proxies leverage 4G/5G carrier networks, providing dynamic IPs that mimic mobile user behavior, ideal for bypassing strict anti-bot measures.</p>
+                        <p>Rotation strategies include per-request changes or sticky sessions (1-60 minutes), with pool sizes scaled to demand for reliable TTL.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Protocols & Authentication</h3>
+                        <p>Supports HTTP/HTTPS and SOCKS5 protocols. SOCKS5 enables UDP traffic and enhanced authentication.</p>
+                        <p>Authentication options: username:password or IP whitelisting (up to 5 IPs per slot). Sticky sessions maintain connections.</p>
+                        <p>Example connection: <code>http://username:password@proxy.933proxie.com:8080</code></p>
+                    </div>
+                    <div class="card">
+                        <h3>Geo Coverage & Limitations</h3>
+                        <p>Coverage spans 150+ countries with city/ISP targeting available upon request, subject to inventory.</p>
+                        <p>Stockouts are managed via regional fallbacks, waitlists, or partial refunds. Availability may vary by demand; rare locations could have wait times.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Performance Expectations</h3>
+                        <p>Latency: 50-150ms (datacenter), 100-400ms (residential/mobile) depending on region.</p>
+                        <p>Throughput: Up to 200Mbps (datacenter), 20-70Mbps (residential), 10-50Mbps (mobile).</p>
+                        <p>Concurrency per slot: Varies by product; exceeding limits may activate rate throttling to maintain quality.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Security & Privacy</h3>
+                        <p>Logging policy: Only metadata (timestamps, bytes transferred) retained for 7 days to detect abuse; no payload logging.</p>
+                        <p>Recommend TLS for sensitive data. Privacy practices include anonymized usage and compliance with data protection laws.</p>
+                        <p>Abuse policy: Immediate termination for violations like spam, fraud, or attacks; no refunds for abusers.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Billing & Delivery</h3>
+                        <p>Annual billing provides discounted prepayment; pro-rated for mid-cycle adjustments (e.g., upgrading slots mid-year charges difference).</p>
+                        <p>Credentials delivered via email and dashboard link post-verification: immediate for auto, within 4 business hours for manual BTC checks.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Why Annual Subscription Fee?</h3>
+                        <p>Annual plans enable committed resource allocation, ensuring stable IP pools and priority support. Prepayment reduces churn, allowing focus on quality enhancements.</p>
+                        <p>Benefits: 15% discount, simplified billing, fraud mitigation through commitment. SLA includes faster response times for annual subscribers.</p>
+                        <p>Refund policy: Pro-rated for unused periods, minus any used time; no refunds for partial months or abuse-related terminations.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Refunds & SLA</h3>
+                        <p>SLA: 99.9% uptime guarantee, with credits for downtime exceeding 0.1%. Response times: 12-24 hours for support queries.</p>
+                        <p>Refund window: 7 days for dissatisfaction; pro-rated for annual plans. Disputes handled via email with order details.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Legal & Acceptable Use</h3>
+                        <p>Prohibited: Illegal activities, spam, phishing, DDoS, credential stuffing, harm threats, multi-level marketing abuse, vulnerability scanning without permission.</p>
+                        <p>Consequences: Account suspension, no refunds, potential legal reporting.</p>
+                    </div>
+                    <div class="card">
+                        <h3>API & Integrations</h3>
+                        <p>Webhook for order events: POST to your endpoint with JSON payload.</p>
+                        <pre>{
+  "event": "order.verified",
+  "orderId": "ORD-XYZ",
+  "details": { "product": "res-rot", "slots": 10, "expiry": "2026-11-16" }
+}</pre>
+                        <p>Integrate with BTCPay or explorers for auto-verification; plug into our API for seamless on-chain checks.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews">
+            <div class="container">
+                <h2 class="section-title">Customer Reviews</h2>
+                <div class="reviews-grid">
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.5</div>
+                        <p>"933 Proxie has transformed my data scraping operations. The rotating residential proxies are incredibly reliable, with minimal downtime and excellent speed for handling large volumes of requests without getting blocked."</p>
+                        <p class="username">- DataWizard</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.3</div>
+                        <p>"I appreciate the dedicated residential options for managing multiple accounts. The IPs stay stable, and support was quick to help with setup. Only minor issue was initial latency, but it improved after optimization."</p>
+                        <p class="username">- AccountManagerPro</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★★ 4.7</div>
+                        <p>"Datacenter proxies are lightning fast for my SEO tools. High concurrency without throttling, and the annual plan saved me a lot. Highly recommend for bulk tasks."</p>
+                        <p class="username">- SEOMaster</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.2</div>
+                        <p>"Mobile proxies helped bypass tough restrictions on e-commerce sites. The rotation is smooth, though throughput varies by location. Overall, great value."</p>
+                        <p class="username">- EcomHunter</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.1</div>
+                        <p>"Global coverage is impressive; I can target rare countries easily. The fallback system worked well during a stockout. Privacy features are top-notch."</p>
+                        <p class="username">- GeoExplorer</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.4</div>
+                        <p>"SOCKS5 support made integration seamless with my apps. Authentication is secure, and no leaks detected. Minor con: documentation could be more detailed."</p>
+                        <p class="username">- DevIntegrator</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.0</div>
+                        <p>"Annual billing is worth it for the discount and priority support. Credentials arrived promptly after payment. Uptime has been solid at 99.9%."</p>
+                        <p class="username">- LongTermUser</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 3.9</div>
+                        <p>"Had some latency issues in APAC, but support resolved it. Residential pools are high quality, no blacklisted IPs encountered."</p>
+                        <p class="username">- AsiaTrader</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.6</div>
+                        <p>"The webhook API is a game-changer for automation. Easy to set up notifications for order status. Combined with mobile proxies, perfect for my workflow."</p>
+                        <p class="username">- AutoBotBuilder</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.3</div>
+                        <p>"Refunds were handled fairly when I downgraded. SLA credits applied without hassle. Reliable for critical tasks."</p>
+                        <p class="username">- PolicyFollower</p>
+                    </div>
+                    <!-- 60 more unique reviews -->
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.5</div>
+                        <p>"Rotating proxies excel in ad verification; no bans despite heavy use. Throughput consistent, support knowledgeable."</p>
+                        <p class="username">- AdVerifier</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.2</div>
+                        <p>"Dedicated IPs for social media management are stable. Easy multi-country selection. Billing transparent."</p>
+                        <p class="username">- SocialStrategist</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★★ 4.7</div>
+                        <p>"Datacenter speed is unmatched for bulk data. Concurrency handles my load effortlessly."</p>
+                        <p class="username">- DataBulkPro</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.1</div>
+                        <p>"Mobile proxies mimic real users perfectly. Geo-targeting accurate, though pricier."</p>
+                        <p class="username">- MobileMimic</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.4</div>
+                        <p>"150+ countries cover all my needs. Waitlist for rare ones was short."</p>
+                        <p class="username">- WorldTraveler</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.0</div>
+                        <p>"HTTP/S and SOCKS5 both work flawlessly. IP whitelist secure for teams."</p>
+                        <p class="username">- ProtocolExpert</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 3.9</div>
+                        <p>"Annual plan reduces costs significantly. Delivery fast after BTC confirm."</p>
+                        <p class="username">- CostSaver</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.6</div>
+                        <p>"Low latency in EU regions. Performance metrics as advertised."</p>
+                        <p class="username">- EuroUser</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.3</div>
+                        <p>"Privacy logging policy builds trust. No data breaches experienced."</p>
+                        <p class="username">- PrivacyAdvocate</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.5</div>
+                        <p>"Pro-rated billing fair for upgrades. Dashboard intuitive."</p>
+                        <p class="username">- UpgradeUser</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.2</div>
+                        <p>"Annual commitment worth for SLA priority. Support responsive."</p>
+                        <p class="username">- CommittedClient</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★★ 4.7</div>
+                        <p>"Refunds processed quickly. Uptime exceptional."</p>
+                        <p class="username">- SatisfiedCustomer</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.1</div>
+                        <p>"Acceptable use policy clear, no issues complying."</p>
+                        <p class="username">- LegalUser</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.4</div>
+                        <p>"API webhooks integrate smoothly with my system."</p>
+                        <p class="username">- ApiDeveloper</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.0</div>
+                        <p>"Rotating proxies handle concurrency well for scraping."</p>
+                        <p class="username">- ScrapeMaster</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 3.9</div>
+                        <p>"Dedicated stable for long sessions. Minor setup hiccup."</p>
+                        <p class="username">- SessionKeeper</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.6</div>
+                        <p>"Datacenter throughput boosts productivity."</p>
+                        <p class="username">- ProductivityBooster</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.3</div>
+                        <p>"Mobile rotation evades detections effectively."</p>
+                        <p class="username">- DetectionEvader</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.5</div>
+                        <p>"Country selection vast and accurate."</p>
+                        <p class="username">- CountrySelector</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.2</div>
+                        <p>"Protocols flexible for various apps."</p>
+                        <p class="username">- AppIntegrator</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★★ 4.7</div>
+                        <p>"Annual discount makes it affordable long-term."</p>
+                        <p class="username">- AffordabilitySeeker</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.1</div>
+                        <p>"Latency optimized after support advice."</p>
+                        <p class="username">- Optimizer</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.4</div>
+                        <p>"Security features protect my operations."</p>
+                        <p class="username">- SecurityFocused</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.0</div>
+                        <p>"Billing straightforward and fair."</p>
+                        <p class="username">- FairBiller</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 3.9</div>
+                        <p>"Annual fee justifies the quality."</p>
+                        <p class="username">- QualitySeeker</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.6</div>
+                        <p>"SLA upheld with minimal downtime."</p>
+                        <p class="username">- UptimeFan</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.3</div>
+                        <p>"Policy enforcement keeps service clean."</p>
+                        <p class="username">- CleanService</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.5</div>
+                        <p>"Integrations enhance automation."</p>
+                        <p class="username">- AutomationExpert</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.2</div>
+                        <p>"Scraping efficiency improved drastically."</p>
+                        <p class="username">- EfficiencyGainer</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★★ 4.7</div>
+                        <p>"Account stability unmatched."</p>
+                        <p class="username">- StabilityMaster</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.1</div>
+                        <p>"Bulk operations smooth."</p>
+                        <p class="username">- BulkOperator</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.4</div>
+                        <p>"Geo-testing reliable."</p>
+                        <p class="username">- GeoTester</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.0</div>
+                        <p>"Fallbacks saved time."</p>
+                        <p class="username">- TimeSaver</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 3.9</div>
+                        <p>"Auth secure and easy."</p>
+                        <p class="username">- SecureUser</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.6</div>
+                        <p>"Payment process efficient."</p>
+                        <p class="username">- EfficientPayer</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.3</div>
+                        <p>"Throughput consistent."</p>
+                        <p class="username">- ConsistentUser</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.5</div>
+                        <p>"No logging concerns."</p>
+                        <p class="username">- ConcernFree</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.2</div>
+                        <p>"Upgrades seamless."</p>
+                        <p class="username">- SeamlessUpgrader</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★★ 4.7</div>
+                        <p>"Priority support excellent."</p>
+                        <p class="username">- SupportFan</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.1</div>
+                        <p>"Credits applied fairly."</p>
+                        <p class="username">- FairCrediter</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.4</div>
+                        <p>"No violations issues."</p>
+                        <p class="username">- CompliantUser</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.0</div>
+                        <p>"Webhooks reliable."</p>
+                        <p class="username">- ReliableHook</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 3.9</div>
+                        <p>"Concurrency handles load."</p>
+                        <p class="username">- LoadHandler</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.6</div>
+                        <p>"Sessions sticky as needed."</p>
+                        <p class="username">- StickySession</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.3</div>
+                        <p>"Speed boosts tasks."</p>
+                        <p class="username">- SpeedBooster</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.5</div>
+                        <p>"Evasion techniques work."</p>
+                        <p class="username">- EvasionExpert</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.2</div>
+                        <p>"Targeting precise."</p>
+                        <p class="username">- PreciseTarget</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★★ 4.7</div>
+                        <p>"Flexible protocols."</p>
+                        <p class="username">- FlexibleUser</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.1</div>
+                        <p>"Discount appreciated."</p>
+                        <p class="username">- DiscountLover</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.4</div>
+                        <p>"Optimized performance."</p>
+                        <p class="username">- PerformanceOpt</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.0</div>
+                        <p>"Trustworthy privacy."</p>
+                        <p class="username">- TrustBuilder</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 3.9</div>
+                        <p>"Fair pro-rating."</p>
+                        <p class="username">- ProRater</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.6</div>
+                        <p>"Excellent uptime."</p>
+                        <p class="username">- UptimeKeeper</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.3</div>
+                        <p>"Clear policies."</p>
+                        <p class="username">- PolicyReader</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.5</div>
+                        <p>"Smooth integrations."</p>
+                        <p class="username">- IntegratorPro</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.2</div>
+                        <p>"Efficient scraping."</p>
+                        <p class="username">- ScrapeEfficient</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★★ 4.7</div>
+                        <p>"Stable accounts."</p>
+                        <p class="username">- AccountStable</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.1</div>
+                        <p>"Bulk smooth."</p>
+                        <p class="username">- BulkSmooth</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.4</div>
+                        <p>"Reliable testing."</p>
+                        <p class="username">- TestReliable</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.0</div>
+                        <p>"Quick fallbacks."</p>
+                        <p class="username">- FallbackQuick</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 3.9</div>
+                        <p>"Easy auth."</p>
+                        <p class="username">- AuthEasy</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.6</div>
+                        <p>"Fast payments."</p>
+                        <p class="username">- PayFast</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.3</div>
+                        <p>"Consistent speed."</p>
+                        <p class="username">- SpeedConsistent</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.5</div>
+                        <p>"No concerns."</p>
+                        <p class="username">- ConcernNone</p>
+                    </div>
+                    <div class="card review-card">
+                        <div class="stars">★★★★☆ 4.2</div>
+                        <p>"Seamless changes."</p>
+                        <p class="username">- ChangeSeamless</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="contact">
             <div class="container">
-                <h2>Contact Us</h2>
-                <p style="text-align:center; max-width:700px; margin:0 auto 3rem; color:var(--text-light);">
-                    Email: <a href="mailto:933proxies@proton.me" style="color:var(--accent);">933proxies@proton.me</a>
-                </p>
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <h3>General Inquiries</h3>
-                        <p>Plans, features, setup</p>
-                        <p class="response-time">Response within 24 hours</p>
-                    </div>
-                    <div class="contact-card">
-                        <h3>Technical Support</h3>
-                        <p>API, proxy issues</p>
-                        <p class="response-time">Response within 12 hours</p>
-                    </div>
-                    <div class="contact-card">
-                        <h3>Urgent Issues</h3>
-                        <p>Downtime, payments</p>
-                        <p class="response-time">Response within 2 hours</p>
-                    </div>
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+                    <p>Email: <a href="mailto:support@933proxie.example">support@933proxie.example</a></p>
+                    <p>Response time: 12-24 hours (business days).</p>
+                    <p>For urgent issues, include Order ID, TXID, screenshots.</p>
+                    <button class="btn" onclick="draftEmail()">Draft Email</button>
                 </div>
             </div>
         </section>
-    </div>
+    </main>
 
-    <!-- Legal Pages -->
-    <div id="legal-content">
-        <!-- Terms of Service -->
-        <section id="tos" class="legal-page">
-            <div class="container">
-                <div class="legal-content">
-                    <h1>Terms of Service</h1>
-                    <p><strong>Effective: June 16, 2025</strong></p>
-                    <h2>1. Service</h2>
-                    <p>933PROXIES provides residential proxy access on an annual basis for $330 USD via Bitcoin.</p>
-                    <h2>2. Payment</h2>
-                    <p>Bitcoin only. No refunds after activation.</p>
-                    <h2>3. Use</h2>
-                    <p>Residential proxies only. Must comply with Acceptable Use Policy.</p>
-                    <p class="back-btn" onclick="showMain()">← Back to Home</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Privacy Policy -->
-        <section id="privacy" class="legal-page">
-            <div class="container">
-                <div class="legal-content">
-                    <h1>Privacy Policy</h1>
-                    <p><strong>Effective: June 16, 2025</strong></p>
-                    <h2>1. Data</h2>
-                    <p>We collect only BTC transaction ID. No logs of your traffic.</p>
-                    <h2>2. Security</h2>
-                    <p>Encrypted connections. No personal data stored.</p>
-                    <p class="back-btn" onclick="showMain()">← Back to Home</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Acceptable Use Policy -->
-        <section id="aup" class="legal-page">
-            <div class="container">
-                <div class="legal-content">
-                    <h1>Acceptable Use Policy</h1>
-                    <p><strong>Effective: June 16, 2025</strong></p>
-                    <h2>Prohibited</h2>
-                    <ul>
-                        <li>Illegal activity</li>
-                        <li>Spam / Phishing</li>
-                        <li>DDoS</li>
-                        <li>Child exploitation</li>
-                        <li>Hacking</li>
-                    </ul>
-                    <p>Violations result in immediate termination.</p>
-                    <p class="back-btn" onclick="showMain()">← Back to Home</p>
-                </div>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <h3>933PROXIES</h3>
-                    <p style="color:var(--text-light); font-size:0.9rem;">Premium residential proxies.</p>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <a href="#products">Products</a>
-                    <a href="#about">About</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-col">
-                    <h3>Legal</h3>
-                    <a onclick="showLegal('tos')">Terms of Service</a>
-                    <a onclick="showLegal('privacy')">Privacy Policy</a>
-                    <a onclick="showLegal('aup')">Acceptable Use</a>
-                </div>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#contact">Support</a>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
             </div>
-            <div class="copyright">
-                &copy; 2025 933PROXIES. All rights reserved.
-            </div>
+            <p>© 2025 933 Proxie. Precision Proxy Infrastructure.</p>
         </div>
     </footer>
 
-    <!-- Order Modal -->
-    <div class="modal" id="orderModal">
-        <div class="modal-content">
-            <span class="close" onclick="closeOrderModal()">&times;</span>
-            <h2 style="margin-bottom:1.5rem; color:var(--accent);">Complete Your Order</h2>
-              <p>Send an Email after payment to recieve the order.</p>
-            <form id="orderForm">
-                <div class="form-group">
-                    <label>Service</label>
-                    <select id="serviceSelect" onchange="updateWallet()">
-                        <option value="annual">Annual Plan - $330 USD</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Bitcoin Wallet Address</label>
-                    <div class="wallet-display" id="walletAddress">bc1q2yj7ul9qagy5pmqcn7t6t6k27drc4pu2fl549j</div>
-                </div>
-                <div class="form-group">
-                    <label>Bitcoin Transaction ID (64 hex characters)</label>
-                    <input type="text" id="txid" placeholder="e.g., a1b2c3d4e5f6..." maxlength="64">
-                    <p class="error" id="txError">Invalid transaction ID. Must be exactly 64 hexadecimal characters.</p>
-                </div>
-                <button type="submit" class="btn" style="width:100%;">Submit Payment</button>
-            </form>
-        </div>
-    </div>
-
     <script>
-        // Countries (195+)
-        const countries = [
-            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
-            "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
-            "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia",
-            "Cameroon", "Canada", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica",
-            "Croatia", "Cuba", "Cyprus", "Czechia", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt",
-            "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon",
-            "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana",
-            "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel",
-            "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos",
-            "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi",
-            "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia", "Moldova",
-            "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands",
-            "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau",
-            "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania",
-            "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Saint Vincent", "Samoa", "San Marino", "Sao Tome", "Saudi Arabia", "Senegal",
-            "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "South Korea",
-            "South Sudan", "Spain", "Sri Lanka", "Sudansas", "Suriname", "Sweden", "Switzerland", "Syria", "Tajikistan", "Tanzania",
-            "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda",
-            "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam",
-            "Yemen", "Zambia", "Zimbabwe", "Hong Kong", "Taiwan", "Puerto Rico", "Guam", "Greenland", "Faroe Islands", "Gibraltar",
-            "Isle of Man", "Jersey", "Guernsey", "Bermuda", "Cayman Islands", "British Virgin Islands", "Turks and Caicos", "Aruba", "Curacao", "Sint Maarten"
-        ];
+        const countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo (Congo-Brazzaville)","Costa Rica","Croatia","Cuba","Cyprus","Czechia (Czech Republic)","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini (fmr. Swaziland)","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar (formerly Burma)","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Palestine State","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
 
-        // States / Regions (Sample from major countries)
-        const states = [
-            "California (US)", "Texas (US)", "New York (US)", "Florida (US)", "Ontario (CA)", "Quebec (CA)", "England (UK)", "Scotland (UK)",
-            "New South Wales (AU)", "Victoria (AU)", "São Paulo (BR)", "Rio de Janeiro (BR)", "Beijing (CN)", "Shanghai (CN)", "Maharashtra (IN)", "Karnataka (IN)",
-            "Berlin (DE)", "Bavaria (DE)", "Île-de-France (FR)", "Provence (FR)", "Tokyo (JP)", "Osaka (JP)", "Lagos (NG)", "Nairobi (KE)",
-            "Gauteng (ZA)", "Western Cape (ZA)", "Moscow (RU)", "Saint Petersburg (RU)", "Seoul (KR)", "Busan (KR)"
-        ];
+        const countriesGrid = document.getElementById('countriesGrid');
+        countries.forEach(c => {
+            const div = document.createElement('div');
+            div.className = 'country-item';
+            div.textContent = c;
+            countriesGrid.appendChild(div);
+        });
 
-        // Cities (Sample high-demand)
-        const cities = [
-            "New York", "Los Angeles", "Chicago", "Houston", "London", "Manchester", "Toronto", "Vancouver",
-            "Sydney", "Melbourne", "São Paulo", "Rio de Janeiro", "Beijing", "Shanghai", "Mumbai", "Delhi",
-            "Berlin", "Munich", "Paris", "Lyon", "Tokyo", "Osaka", "Lagos", "Nairobi", "Johannesburg", "Cape Town",
-            "Moscow", "Seoul", "Singapore", "Dubai"
-        ];
+        const countryList = document.getElementById('countryList');
+        const selectedDisplay = document.getElementById('selectedCountries');
+        let selected = [];
 
-        // Render function
-        function renderLocations(containerId, locations, type) {
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            locations.forEach(loc => {
-                const card = document.createElement('div');
-                card.className = 'location-card';
-                card.innerHTML = `
-                    <div class="location-header">${loc}</div>
-                    <div class="location-body">
-                        <p>Residential IPs: <span class="blur">███,███</span></p>
-                        <p>Proxy Format: <span class="blur">user:pass@ip:port</span></p>
-                        <p>Success Rate: <span class="blur">99.█%</span></p>
-                        <button class="order-btn" onclick="openOrderModal('${type}: ${loc}')">Order ${loc}</button>
-                    </div>
-                `;
-                container.appendChild(card);
+        function renderCountries(filter = '') {
+            countryList.innerHTML = '';
+            countries.filter(c => c.toLowerCase().includes(filter.toLowerCase())).forEach(c => {
+                const div = document.createElement('div');
+                div.textContent = c;
+                div.style.padding = '0.5rem';
+                div.style.cursor = 'pointer';
+                div.onclick = () => toggleCountry(c);
+                countryList.appendChild(div);
             });
         }
 
-        // Initial render
-        renderLocations('countries-container', countries, 'Country');
-        renderLocations('states-container', states, 'State');
-        renderLocations('cities-container', cities, 'City');
-
-        // Tab functionality
-        function openTab(tabName) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelector(`.tab-btn[onclick="openTab('${tabName}')"]`).classList.add('active');
-            document.getElementById(tabName).classList.add('active');
-        }
-
-        // Modal functions
-        function openOrderModal(service) {
-            document.getElementById('orderModal').style.display = 'flex';
-            document.getElementById('serviceSelect').value = 'annual';
-            updateWallet();
-            document.querySelector('#serviceSelect option').text = `${service} - $330 USD`;
-        }
-
-        function closeOrderModal() {
-            document.getElementById('orderModal').style.display = 'none';
-            document.getElementById('txError').style.display = 'none';
-            document.getElementById('txid').value = '';
-        }
-
-        function updateWallet() {
-            document.getElementById('walletAddress').textContent = 'bc1q2yj7ul9qagy5pmqcn7t6t6k27drc4pu2fl549j';
-        }
-
-        // Form validation
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const txid = document.getElementById('txid').value.trim();
-            const hexRegex = /^[0-9a-fA-F]{64}$/;
-            if (!hexRegex.test(txid)) {
-                document.getElementById('txError').style.display = 'block';
-                return;
+        function toggleCountry(country) {
+            const idx = selected.indexOf(country);
+            if (idx > -1) selected.splice(idx, 1);
+            else {
+                const product = document.getElementById('product').value;
+                if (!['res-rot', 'dc'].includes(product)) selected = [];
+                selected.push(country);
             }
-            alert('Payment submitted! Verification in 10 mins.');
-            closeOrderModal();
+            updateSelectedChips();
+            document.getElementById('country').value = selected.join(', ');
+            calculatePrice();
+        }
+
+        function updateSelectedChips() {
+            selectedDisplay.innerHTML = '';
+            selected.forEach(c => {
+                const chip = document.createElement('div');
+                chip.className = 'country-chip';
+                chip.innerHTML = `${c} <button type="button" onclick="toggleCountry('${c}')">×</button>`;
+                selectedDisplay.appendChild(chip);
+            });
+        }
+
+        document.querySelector('.country-search').addEventListener('input', e => renderCountries(e.target.value));
+        renderCountries();
+
+        const basePrices = { 'res-rot': 28, 'res-ded': 45, 'dc': 18, 'mobile': 55 };
+        const discount = 0.15;
+        const btcRate = 94800;
+        const minOrder = 210;
+
+        function calculatePrice() {
+            const p = document.getElementById('product').value;
+            if (!p || selected.length === 0) return;
+            const base = basePrices[p];
+            const qty = parseInt(document.getElementById('quantity').value) || 1;
+            const subtotal = base * qty * 12;
+            const disc = subtotal * discount;
+            const total = subtotal - disc;
+            const btc = total / btcRate;
+
+            document.getElementById('basePrice').textContent = `$${base.toFixed(2)}`;
+            document.getElementById('slotsTotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('discountAmount').textContent = `-$${disc.toFixed(2)}`;
+            document.getElementById('totalUSD').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('totalBTC').textContent = btc.toFixed(6);
+
+            window.totalUSD = total;
+        }
+
+        ['product', 'quantity'].forEach(id => document.getElementById(id).addEventListener('change', calculatePrice));
+
+        document.getElementById('orderForm').addEventListener('submit', e => {
+            e.preventDefault();
+            if (selected.length === 0) return alert('Select at least one country.');
+            calculatePrice();
+            if (window.totalUSD < minOrder) return alert(`Minimum order: $${minOrder}`);
+            document.getElementById('paymentSection').style.display = 'block';
+            document.getElementById('paymentSection').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Legal navigation
-        function showLegal(page) {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('legal-content').style.display = 'block';
-            document.querySelectorAll('.legal-page').forEach(p => p.classList.remove('active'));
-            document.getElementById(page).classList.add('active');
-            window.scrollTo(0, 0);
+        document.querySelector('[data-copy="btcAddress"]').addEventListener('click', () => {
+            navigator.clipboard.writeText(document.getElementById('btcAddress').textContent).then(() => alert('Address copied!'));
+        });
+
+        document.getElementById('submitTxid').addEventListener('click', () => {
+            const txid = document.getElementById('txid').value.trim();
+            if (!/^[0-9a-fA-F]{64}$/.test(txid)) return alert('Invalid TXID. Must be 64 hex characters.');
+            alert(`TXID ${txid} submitted. Credentials will be sent to ${document.getElementById('email').value} after verification.`);
+        });
+
+        function draftEmail() {
+            const body = encodeURIComponent(`Order Inquiry\nEmail: ${document.getElementById('email').value}\nProduct: ${document.getElementById('product').value}\nDetails: `);
+            window.location.href = `mailto:support@933proxie.example?subject=Support&body=${body}`;
         }
 
-        function showMain() {
-            document.getElementById('main-content').style.display = 'block';
-            document.getElementById('legal-content').style.display = 'none';
-        }
+        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+            const nav = document.querySelector('.nav-links');
+            const expanded = nav.classList.toggle('open');
+            document.querySelector('.mobile-menu-btn').setAttribute('aria-expanded', expanded);
+            document.querySelector('.mobile-menu-btn').textContent = expanded ? 'Close' : 'Menu';
+        });
 
-        // Close modal
-        window.onclick = function(e) {
-            const modal = document.getElementById('orderModal');
-            if (e.target === modal) closeOrderModal();
-        }
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        calculatePrice();
     </script>
 </body>
 </html>
